@@ -1,8 +1,8 @@
 {
-  "name": "js-task-boilerplate",
+  "name": "qa_fill-tank",
   "version": "1.0.0",
-  "description": "js task boilerplate",
-  "main": "src/sum.js",
+  "description": "QA Fill tank",
+  "main": "src/fillTank.js",
   "scripts": {
     "init": "mate-scripts init",
     "start": "mate-scripts start",
