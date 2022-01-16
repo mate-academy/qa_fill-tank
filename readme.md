@@ -23,7 +23,7 @@ following the next rules:
 - ALWAYS fill in only what the client can pay.
 - Round the poured amount by discarding number to the tenth part.
 - If the poured amount is less than 2 liters, do not pour at all.
-- Round the price of the purchased fuel the to the nearest hundredth part.
+- Round the price of the purchased fuel to the nearest hundredth part.
 
 ---
 - [Guideline](https://github.com/mate-academy/js_task-guideline/blob/master/README.md)
