@@ -37,7 +37,7 @@ describe('fillTank', () => {
     ]).toEqual([2040, 40]);
   });
 
-  it('If the `amount` is not given', () => {
+  it('the `amount` is not given', () => {
     const customer = {
       money: 3000,
       vehicle: {
@@ -53,7 +53,7 @@ describe('fillTank', () => {
     ).toBe(40);
   });
 
-  it('If the `amount` is more than tank capacity', () => {
+  it('the `amount` is more than tank capacity', () => {
     const customer = {
       money: 3000,
       vehicle: {
@@ -69,7 +69,7 @@ describe('fillTank', () => {
     ).toBe(40);
   });
 
-  it('If the `customer` does not have enough money', () => {
+  it('the `customer` does not have enough money', () => {
     const customer = {
       money: 3000,
       vehicle: {
