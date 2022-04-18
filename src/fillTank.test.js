@@ -92,7 +92,8 @@ describe('fillTank', () => {
     });
   });
 
-  it(`decline an operation if the customer can buy less then 2 liters of fuel`, () => {
+  it(`decline an operation if the customer can buy less
+  then 2 liters of fuel`, () => {
     // preparation
     const customer = {
       money: 18,
