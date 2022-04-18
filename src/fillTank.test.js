@@ -7,7 +7,7 @@ describe('fillTank', () => {
     expect(fillTank).toBeInstanceOf(Function);
   });
 
-  it(`when amount <2 do not pour at all`, () => {
+  it(`should do nothing when amount < 2`, () => {
     // preparation
     const customer = {
       money: 3000,
@@ -28,7 +28,7 @@ describe('fillTank', () => {
     });
   });
 
-  it(`pour customer when amount 2`, () => {
+  it(`should refills fuel if the amount = 2`, () => {
     // preparation
     const customer = {
       money: 3000,
@@ -49,7 +49,7 @@ describe('fillTank', () => {
     });
   });
 
-  it(`pour full tank when amount not given`, () => {
+  it(`should refills full tank if the amount is not given`, () => {
     // preparation
     const customer = {
       money: 3000,
@@ -70,7 +70,8 @@ describe('fillTank', () => {
     });
   });
 
-  it(`pour in amount if the tank can hold it`, () => {
+  it(`should fill the tank fully if the customer wants to buy
+  more fuel than his vehicle can accommodate`, () => {
     // preparation
     const customer = {
       money: 3000,
@@ -91,29 +92,7 @@ describe('fillTank', () => {
     });
   });
 
-  it(`pour in amount when amount is greater`, () => {
-    // preparation
-    const customer = {
-      money: 3000,
-      vehicle: {
-        maxTankCapacity: 40,
-        fuelRemains: 8,
-      },
-    };
-
-    fillTank(customer, 10, 33);
-
-    expect(customer).toEqual({
-      money: 2680,
-      vehicle: {
-        maxTankCapacity: 40,
-        fuelRemains: 40,
-      },
-    });
-  });
-
-  it(`do not fill if customer do not have enough
-  money for at least 2 liters`, () => {
+  it(`decline an operation if the customer can buy less then 2 liters of fuel`, () => {
     // preparation
     const customer = {
       money: 18,
@@ -155,7 +134,7 @@ describe('fillTank', () => {
     });
   });
 
-  it(`Round the amount poured, to the tenth`, () => {
+  it(`Round the amount fuel, to the tenth`, () => {
     // preparation
     const customer = {
       money: 3000,
