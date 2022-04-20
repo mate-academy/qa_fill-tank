@@ -180,8 +180,7 @@ describe('fillTank', () => {
     expect(customer).toEqual(customer2);
   });
 
-  it(`should not pour the fuel at all, if the customer `
-  + `can purchase less than 2 liters`, () => {
+  it(`should round the price of the purchased fuel the to the nearest hundredth part`, () => {
     const customer = {
       money: 750,
       vehicle: {
