@@ -180,7 +180,8 @@ describe('fillTank', () => {
     expect(customer).toEqual(customer2);
   });
 
-  it(`should round the price of the purchased fuel the to the nearest hundredth part`, () => {
+  it(`should round the price of the purchased fuel the to `
+     + `the nearest hundredth part`, () => {
     const customer = {
       money: 750,
       vehicle: {
