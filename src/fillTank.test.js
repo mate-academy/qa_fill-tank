@@ -16,7 +16,7 @@ describe('fillTank', () => {
       },
     };
 
-    expect(fillTank(artem, 55, 200)).toBe(undefined);
+    expect(fillTank(artem, 55, 200)).toBeUndefined();
   });
 
   it('should fill a full tank', () => {
