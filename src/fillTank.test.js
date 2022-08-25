@@ -169,7 +169,8 @@ describe('fillTank function', () => {
     expect(customer.vehicle.fuelRemains).toBe(40);
   });
 
-  it(`should not charge customer and fullfill tank if 'false' was inputed`, () => {
+  it(`should not charge customer and fullfill tank` + 
+      `if 'false' was inputed`, () => {
     const customer = {
       money: 3000, // customer account balance
       vehicle: {
@@ -183,7 +184,8 @@ describe('fillTank function', () => {
     expect(customer.vehicle.fuelRemains).toBe(40);
   });
   
-  it(`should not charge customer and not fill the tank if the price is negative`, () => {
+  it(`should not charge customer and not fill the tank` + 
+      `if the price is negative`, () => {
     const customer = {
       money: 3000, // customer account balance
       vehicle: {
@@ -197,7 +199,8 @@ describe('fillTank function', () => {
     expect(customer.vehicle.fuelRemains).toBe(8);
   });
 
-  it(`should not charge customer and not fill the tank if the price is zero, and zero amount`, () => {
+  it(`should not charge customer and not fill the tank` + 
+      `if the price is zero, and zero amount`, () => {
     const customer = {
       money: 3000, // customer account balance
       vehicle: {
