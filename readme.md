@@ -1,10 +1,12 @@
-# QA Fill tank ([uk](readme.uk.md), [ru](readme.ru.md))
+# QA Fill tank ([uk](readme.uk.md))
+
 Mate Royal Oil decided to completely automate the refueling process.
 
 Write tests for `fillTank` function that takes a `customer` object, `fuelPrice`
 per 1 liter and `amount` of fuel the customer wants to buy.
 
 `customer` object contains the next props:
+
 ```js
 customer = {
   money: 3000, // customer account balance
@@ -26,5 +28,6 @@ following the next rules:
 - Round the price of the purchased fuel the to the nearest hundredth part.
 
 ---
-- [Guideline](https://github.com/mate-academy/js_task-guideline/blob/master/README.md)
-- Read more about [Jest expectations](https://jestjs.io/uk/docs/expect)
+
+- [Guideline](https://github.com/mate-academy/js_task-guideline/blob/master/README.md);
+- Read more about [Jest expectations](https://jestjs.io/uk/docs/expect).

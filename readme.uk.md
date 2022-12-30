@@ -1,11 +1,13 @@
 # QA Fill tank
+
 Mate Royal Oil вирішили повністю автоматизувати процес заправки.
 
 Напиши тести для функції `fillTank`, яка приймає об'єкт `customer`, ціну 1 літра
 палива `fuelPrice` та `amount` - скільки літрів хоче купити клієнт.
 
 Об'єкт `customer` містить наступні властивості:
-```
+
+```js
 customer = {
   money: 3000, // залишок грошей на рахунку клієнта
   vehicle {
@@ -26,5 +28,6 @@ customer = {
 - Вартість заправленого пального округли до сотих (до найближчого значення).
 
 ---
-- [Guideline](https://github.com/mate-academy/js_task-guideline/blob/master/README.md)
-- Read more about [Jest expectations](https://jestjs.io/uk/docs/expect)
+
+- [Guideline](https://github.com/mate-academy/js_task-guideline/blob/master/README.md);
+- Read more about [Jest expectations](https://jestjs.io/uk/docs/expect).
