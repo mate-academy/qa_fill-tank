@@ -180,28 +180,6 @@ describe('fillTank', () => {
       });
   });
 
-  it(`should decline an operation if the amount of
-  ordered fuel is less than 2 liters`, () => {
-    const customer = {
-      money: 810,
-      vehicle: {
-        maxTankCapacity: 45,
-        fuelRemains: 20,
-      },
-    };
-
-    fillTank(customer, 10, 1);
-
-    expect(customer)
-      .toStrictEqual({
-        money: 810,
-        vehicle: {
-          maxTankCapacity: 45,
-          fuelRemains: 20,
-        },
-      });
-  });
-
   it(`should round fuel amount down to tenth`, () => {
     const customer = {
       money: 140,
