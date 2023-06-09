@@ -107,8 +107,8 @@ describe('fillTank', () => {
     expect(customer.money).toBe(expectedMoney);
   });
 
-  it(`should don't fill the tank if the poured amount`
-  + ` is less than 2 liters.`, () => {
+  it(`should dshould approximate the price of the gasoline you fill`
+  + ` up to a hundredth`, () => {
     const customer = {
       money: 2600,
       vehicle: {
