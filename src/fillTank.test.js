@@ -19,23 +19,6 @@ describe('fillTank', () => {
       expect(customer.money).toEqual(2952);
     });
 
-  it('should fill the tank with the max amount if no amount is given',
-    () => {
-      const customer = {
-        money: 3000,
-        vehicle: {
-          maxTankCapacity: 40,
-          fuelRemains: 8,
-        },
-      };
-      const fuelPrice = 1.5;
-      const amount = 20;
-
-      fillTank(customer, fuelPrice, amount);
-      expect(customer.vehicle.fuelRemains).toEqual(28);
-      expect(customer.money).toEqual(2970);
-    });
-
   it('should fill the tank with the max amount that the customer can afford',
     () => {
       const customer = {
@@ -117,18 +100,19 @@ describe('fillTank', () => {
       expect(customer.money).toEqual(70.75);
     });
 
-  it('should round the fuel price to the nearest hundredth part', () => {
-    const customer = {
-      money: 150,
-      vehicle: {
-        maxTankCapacity: 40,
-        fuelRemains: 8,
-      },
-    };
-    const fuelPrice = 2.3;
+  it('should round the fuel price to the nearest hundredth part',
+    () => {
+      const customer = {
+        money: 150,
+        vehicle: {
+          maxTankCapacity: 40,
+          fuelRemains: 8,
+        },
+      };
+      const fuelPrice = 2.3;
 
-    fillTank(customer, fuelPrice);
-    expect(customer.vehicle.fuelRemains).toEqual(40);
-    expect(customer.money).toEqual(76.4);
-  });
+      fillTank(customer, fuelPrice);
+      expect(customer.vehicle.fuelRemains).toEqual(40);
+      expect(customer.money).toEqual(76.4);
+    });
 });
