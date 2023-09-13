@@ -44,8 +44,8 @@ describe('fillTank', () => {
         fuelRemains: 8,
       },
     };
-    const fuelPrice = 5; // Adjust the fuel price as needed for the test
-    const amount = 30; // Amount exceeds what the customer can afford
+    const fuelPrice = 5; 
+    const amount = 30; 
 
     fillTank(customer, fuelPrice, amount);
 
