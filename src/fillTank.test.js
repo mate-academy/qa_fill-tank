@@ -3,7 +3,8 @@
 describe('fillTank', () => {
   const { fillTank } = require('./fillTank');
 
-  it('Fill the  maximum capacity if no amount is given', () => {
+  it('should fill the maximum capacity if no amount is given'
+   + ' updating fuelRemains and money', () => {
     const customer = {
       money: 3000,
       vehicle: {
@@ -19,7 +20,8 @@ describe('fillTank', () => {
     expect(customer.money).toEqual(2936);
   });
 
-  it('if the given amount exceeds tank capacity', () => {
+  it('if the given amount exceeds tank capacity'
+  + ' updating fuelRemains and money', () => {
     const customer = {
       money: 3000,
       vehicle: {
@@ -36,7 +38,8 @@ describe('fillTank', () => {
     expect(customer.money).toEqual(2936);
   });
 
-  it('should fill the tank only with what the customer can afford', () => {
+  it('should fill the tank only with what the customer can afford'
+  + ' updating fuelRemains and money', () => {
     const customer = {
       money: 100,
       vehicle: {
@@ -44,8 +47,8 @@ describe('fillTank', () => {
         fuelRemains: 8,
       },
     };
-    const fuelPrice = 5; 
-    const amount = 30; 
+    const fuelPrice = 5;
+    const amount = 30;
 
     fillTank(customer, fuelPrice, amount);
 
@@ -53,7 +56,8 @@ describe('fillTank', () => {
     expect(customer.money).toEqual(0);
   });
 
-  it('should round the poured amount to the tenth part', () => {
+  it('should round the poured amount to the tenth part'
+  + ' updating fuelRemains and money', () => {
     const customer = {
       money: 3000,
       vehicle: {
@@ -69,7 +73,8 @@ describe('fillTank', () => {
     expect(customer.money).toEqual(2984.6);
   });
 
-  it('should not pour fuel if the rounded amount is less than 2 liters', () => {
+  it('should not pour fuel if the rounded amount is less than 2 liters'
+  + ' updating fuelRemains and money', () => {
     const customer = {
       money: 3000,
       vehicle: {
