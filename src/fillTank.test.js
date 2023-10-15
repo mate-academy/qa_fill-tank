@@ -3,7 +3,7 @@
 describe('fillTank', () => {
   const { fillTank } = require('./fillTank');
 
-  it('should fill tank to the max capacity and deduct the correct amount', () => {
+  it('should fill tank to the max capacity and deduct correct amount', () => {
     const customer = {
       money: 3000,
       vehicle: {
