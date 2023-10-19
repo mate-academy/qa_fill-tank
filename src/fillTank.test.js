@@ -70,11 +70,15 @@ describe("fillTank", () => {
     fillTank(customerForMoneyAmount, fuelPrice, amount);
 
     expect(customerForMoneyAmount.vehicle.fuelRemains).toStrictEqual(
-      8 + amount
+      8 + Math.floor(initialMoney / fuelPrice)
     );
 
     expect(customerForMoneyAmount.money).toStrictEqual(
-      initialMoney - fuelPrice * amount
+      initialMoney - Math.floor(initialMoney / fuelPrice) * fuelPrice
     );
   });
+
+  expect(customerForMoneyAmount.money).toStrictEqual(
+    initialMoney - fuelPrice * amount
+  );
 });
