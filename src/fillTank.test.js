@@ -1,11 +1,11 @@
 "use strict";
 
-const { fillTank } = require("./fillTank");
+const { fillTank } = require('./fillTank');
 
-describe("fillTank", () => {
-  it("should fill the tank completely", () => {
+describe('fillTank', () => {
+  it('should fill the tank completely', () => {
     const customer = {
-      money: 200,
+      money: 130,
       vehicle: {
         maxTankCapacity: 40,
         fuelRemains: 5,
@@ -17,7 +17,7 @@ describe("fillTank", () => {
     expect(customer.money).toBe(0);
   });
 
-  it("should partially fill the tank", () => {
+  it('should partially fill the tank', () => {
     const customer = {
       money: 100,
       vehicle: {
@@ -31,7 +31,7 @@ describe("fillTank", () => {
     expect(customer.money).toBe(60);
   });
 
-  it("should not pour less than 2 liters", () => {
+  it('should not pour less than 2 liters', () => {
     const customer = {
       money: 50,
       vehicle: {
@@ -45,7 +45,7 @@ describe("fillTank", () => {
     expect(customer.money).toBe(50);
   });
 
-  it("should pour only what the customer can pay", () => {
+  it('should pour only what the customer can pay', () => {
     const customer = {
       money: 20,
       vehicle: {
