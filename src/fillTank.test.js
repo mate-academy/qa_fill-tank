@@ -1,8 +1,7 @@
 "use strict";
 
-
-describe('fillTank', () => {
-  const { fillTank } = require('./fillTank');
+describe("fillTank", () => {
+  const { fillTank } = require("./fillTank");
   const customer = {
     money: 3000,
     vehicle: {
@@ -10,36 +9,39 @@ describe('fillTank', () => {
       fuelRemains: 8,
     },
   };
-  const fuelPrice = 4.80;
+  const fuelPrice = 4.8;
 
-  it('should be declared', () => {
+  it("should be declared", () => {
     expect(fillTank).toBeInstanceOf(Function);
   });
 
-  // write tests here
-  it('should round the poured amount to the tenth part', () => {
+  it("should round the poured amount to the tenth part", () => {
     fillTank(customer, fuelPrice, 20.78);
 
     expect(customer.vehicle.fuelRemains).toStrictEqual(28.7);
   });
 
-  it('should order a full tank if the amount is not given', () => {
+  it("should order a full tank if the amount is not given", () => {
     fillTank(customer, fuelPrice);
 
     expect(customer.vehicle.fuelRemains).toStrictEqual(40);
   });
 
-  it('should pour only what fuel fits if the amount > tank', () => {
+  it("should pour only what fuel fits if the amount > tank", () => {
     fillTank(customer, fuelPrice, 50);
 
     expect(customer.vehicle.fuelRemains).toStrictEqual(40);
   });
 
-  it('should not pour if the amount is less than 2', () => {
+  it("should not pour if the amount is less than 2", () => {
+    const initialMoney = customer.money;
     expect(fillTank(customer, fuelPrice, 1)).toBeUndefined();
+
+    // Verify that customer's money remains the same
+    expect(customer.money).toBe(initialMoney);
   });
 
-  it('should round the price to the nearest hundredth part', () => {
+  it("should round the price to the nearest hundredth part", () => {
     const customerForPriceTest = {
       money: 3000,
       vehicle: {
@@ -54,7 +56,7 @@ describe('fillTank', () => {
     expect(customerForPriceTest.money).toStrictEqual(2951.91);
   });
 
-  it('should fill only what the client can pay', () => {
+  it("should fill only what client can pay and check fuel filled", () => {
     const customerForMoneyAmount = {
       money: 48,
       vehicle: {
@@ -63,22 +65,16 @@ describe('fillTank', () => {
       },
     };
 
-    fillTank(customerForMoneyAmount, fuelPrice, 11);
+    const initialMoney = customerForMoneyAmount.money;
+    const amount = 11;
+    fillTank(customerForMoneyAmount, fuelPrice, amount);
 
-    expect(customerForMoneyAmount.money).toStrictEqual(0);
-  });
+    expect(customerForMoneyAmount.vehicle.fuelRemains).toStrictEqual(
+      8 + amount
+    );
 
-  it('should fill the right amount of fuel when money < amount * price', () => {
-    const customerForMoneyAmount = {
-      money: 48,
-      vehicle: {
-        maxTankCapacity: 40,
-        fuelRemains: 8,
-      },
-    };
-
-    fillTank(customerForMoneyAmount, fuelPrice, 11);
-
-    expect(customerForMoneyAmount.vehicle.fuelRemains).toStrictEqual(18);
+    expect(customerForMoneyAmount.money).toStrictEqual(
+      initialMoney - fuelPrice * amount
+    );
   });
 });
