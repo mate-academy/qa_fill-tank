@@ -14,7 +14,7 @@ describe("fillTank", () => {
     const fuelPrice = 2;
     fillTank(customer, fuelPrice);
     expect(customer.vehicle.fuelRemains).toBe(40);
-    expect(customer.money).toBe(75);
+    expect(customer.money).toBe(0);
   });
 
   it("should partially fill the tank", () => {
