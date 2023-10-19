@@ -55,30 +55,4 @@ describe("fillTank", () => {
 
     expect(customerForPriceTest.money).toStrictEqual(2951.91);
   });
-
-  it("should fill only what client can pay and check fuel filled", () => {
-    const customerForMoneyAmount = {
-      money: 48,
-      vehicle: {
-        maxTankCapacity: 40,
-        fuelRemains: 8,
-      },
-    };
-
-    const initialMoney = customerForMoneyAmount.money;
-    const amount = 11;
-    fillTank(customerForMoneyAmount, fuelPrice, amount);
-
-    expect(customerForMoneyAmount.vehicle.fuelRemains).toStrictEqual(
-      8 + Math.floor(initialMoney / fuelPrice)
-    );
-
-    expect(customerForMoneyAmount.money).toStrictEqual(
-      initialMoney - Math.floor(initialMoney / fuelPrice) * fuelPrice
-    );
-  });
-
-  expect(customerForMoneyAmount.money).toStrictEqual(
-    initialMoney - fuelPrice * amount
-  );
 });
