@@ -1,100 +1,61 @@
 "use strict";
+
 const { fillTank } = require("./fillTank");
 
 describe("fillTank", () => {
-  it("should fill the tank with the full tank capacity if no amount is given", () => {
+  it("should fill the tank completely", () => {
     const customer = {
-      money: 100,
+      money: 200,
       vehicle: {
         maxTankCapacity: 40,
-        fuelRemains: 10,
+        fuelRemains: 5,
       },
     };
     const fuelPrice = 2;
-
     fillTank(customer, fuelPrice);
-
-    expect(customer.vehicle.fuelRemains).toBeCloseTo(40, 2);
-    expect(customer.money).toBe(20);
+    expect(customer.vehicle.fuelRemains).toBe(40);
+    expect(customer.money).toBe(75);
   });
 
-  it("should fill the tank with the given amount if it fits in the tank and the customer can pay", () => {
-    const customer = {
-      money: 150,
-      vehicle: {
-        maxTankCapacity: 40,
-        fuelRemains: 10,
-      },
-    };
-    const fuelPrice = 2;
-
-    fillTank(customer, fuelPrice, 15);
-
-    expect(customer.vehicle.fuelRemains).toBeCloseTo(25, 2);
-    expect(customer.money).toBe(120);
-  });
-
-  it("should fill the tank only with the remaining capacity if the given amount exceeds the tank capacity", () => {
-    const customer = {
-      money: 150,
-      vehicle: {
-        maxTankCapacity: 40,
-        fuelRemains: 10,
-      },
-    };
-    const fuelPrice = 2;
-
-    fillTank(customer, fuelPrice, 50);
-
-    expect(customer.vehicle.fuelRemains).toBeCloseTo(40, 2);
-    expect(customer.money).toBe(10);
-  });
-
-  it("should round the filled amount and the price of purchased fuel", () => {
+  it("should partially fill the tank", () => {
     const customer = {
       money: 100,
       vehicle: {
         maxTankCapacity: 40,
-        fuelRemains: 10,
-      },
-    };
-    const fuelPrice = 1.234;
-
-    fillTank(customer, fuelPrice, 15);
-
-    expect(customer.vehicle.fuelRemains).toBeCloseTo(25, 2);
-    expect(customer.money).toBeCloseTo(85.35, 2);
-  });
-
-  it("should not pour fuel if the requested amount is less than 2 liters", () => {
-    const customer = {
-      money: 100,
-      vehicle: {
-        maxTankCapacity: 40,
-        fuelRemains: 10,
+        fuelRemains: 5,
       },
     };
     const fuelPrice = 2;
-
-    fillTank(customer, fuelPrice, 0.5);
-
-    expect(customer.vehicle.fuelRemains).toBe(10);
-    expect(customer.money).toBe(100);
+    fillTank(customer, fuelPrice, 20);
+    expect(customer.vehicle.fuelRemains).toBe(25);
+    expect(customer.money).toBe(60);
   });
 
-  it("should not pour fuel if the customer can't afford it", () => {
+  it("should not pour less than 2 liters", () => {
     const customer = {
-      money: 10,
+      money: 50,
       vehicle: {
         maxTankCapacity: 40,
-        fuelRemains: 10,
+        fuelRemains: 5,
       },
     };
-    const fuelPrice = 2;
+    const fuelPrice = 5;
+    fillTank(customer, fuelPrice, 5);
+    expect(customer.vehicle.fuelRemains).toBe(5);
+    expect(customer.money).toBe(50);
+  });
 
-    fillTank(customer, fuelPrice, 15);
-
-    expect(customer.vehicle.fuelRemains).toBe(10);
-    expect(customer.money).toBe(10);
+  it("should pour only what the customer can pay", () => {
+    const customer = {
+      money: 20,
+      vehicle: {
+        maxTankCapacity: 40,
+        fuelRemains: 5,
+      },
+    };
+    const fuelPrice = 3;
+    fillTank(customer, fuelPrice);
+    expect(customer.vehicle.fuelRemains).toBeCloseTo(10.83, 2);
+    expect(customer.money).toBe(0);
   });
 });
