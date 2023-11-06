@@ -33,10 +33,10 @@ describe('fillTank', () => {
         fuelRemains: 13,
       },
     });
-
   });
 
-  it('should fill the full tank if enough money, and ammount is unspecified', () => {
+  it('should fill the full tank if enough money'
+  + 'and ammount is unspecified', () => {
     const customer = {
       money: 3000,
       vehicle: {
@@ -54,10 +54,10 @@ describe('fillTank', () => {
         fuelRemains: 40,
       },
     });
-
   });
 
-  it('should fill the full tank if enough money and ammount > maxTankCapacity', () => {
+  it('should fill the full tank if enough money'
+  + 'ammount > maxTankCapacity', () => {
     const customer = {
       money: 3000,
       vehicle: {
@@ -75,7 +75,6 @@ describe('fillTank', () => {
         fuelRemains: 40,
       },
     });
-
   });
 
   it('should fill the tank as much as client can pay', () => {
@@ -96,7 +95,6 @@ describe('fillTank', () => {
         fuelRemains: 10,
       },
     });
-
   });
 
   it('should round the fuel order down to the nearest tenth', () => {
@@ -108,7 +106,7 @@ describe('fillTank', () => {
       },
     };
 
-    fillTank(customer, 25, 2,8);
+    fillTank(customer, 25, 2, 8);
 
     expect(customer).toEqual({
       money: 50,
@@ -117,7 +115,6 @@ describe('fillTank', () => {
         fuelRemains: 10,
       },
     });
-
   });
 
   it('should not fill the tank if ammount < 2', () => {
@@ -138,7 +135,6 @@ describe('fillTank', () => {
         fuelRemains: 8,
       },
     });
-
   });
 
   it('should round the fuel price to the nearest hundredth', () => {
@@ -159,6 +155,5 @@ describe('fillTank', () => {
         fuelRemains: 13,
       },
     });
-
   });
 });
