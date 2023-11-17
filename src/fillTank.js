@@ -20,7 +20,7 @@ function fillTank(customer, fuelPrice, amount = Infinity) {
   const requiredAmount = Math.min(amount, freeSpace, canBuy);
   const roundedAmount = roundFuel(requiredAmount);
 
-  if (roundedAmount < 2) {
+  if (roundedAmount < 2 || roundedAmount * fuelPrice > customer.money) {
     return;
   }
 
