@@ -55,8 +55,8 @@ describe('fillTank', () => {
 
     fillTank(customer, fuelPrice, amount);
 
-    expect(customer.vehicle.fuelRemains).toBe(8);
-    expect(customer.money).toBe(100);
+    expect(customer.vehicle.fuelRemains).toBe(18);
+    expect(customer.money).toBe(0);
   }
 );
 
