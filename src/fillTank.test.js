@@ -3,7 +3,10 @@
 const { fillTank } = require('./fillTank');
 
 describe('fillTank', () => {
-  it('should fill the tank to its maximum capacity if no amount is given', () => {
+  it(
+  'should fill the tank to its maximum capacity '
+  + 'if no amount is given', 
+  () => {
     const customer = {
       money: 3000,
       vehicle: {
@@ -11,6 +14,14 @@ describe('fillTank', () => {
         fuelRemains: 8,
       },
     };
+    const fuelPrice = 10;
+
+    fillTank(customer, fuelPrice);
+
+    expect(customer.vehicle.fuelRemains).toBe(40);
+    expect(customer.money).toBe(3000 - (32 * fuelPrice));
+  }
+);
     const fuelPrice = 10;
 
     fillTank(customer, fuelPrice);
