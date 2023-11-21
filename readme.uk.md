@@ -10,7 +10,7 @@ Mate Royal Oil вирішили повністю автоматизувати п
 ```js
 customer = {
   money: 3000, // залишок грошей на рахунку клієнта
-  vehicle {
+  vehicle: {
     maxTankCapacity: 40, // Об'єм бака
     fuelRemains: 8, // Залишок палива у баку
   }
