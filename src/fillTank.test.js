@@ -2,13 +2,14 @@
 
 describe('fillTank', () => {
   const { fillTank } = require('./fillTank');
-  
+
   it(`function should be declared`, () => {
     expect(fillTank)
       .toBeInstanceOf(Function);
   });
 
-  it(`function should fill the tank fully if the 'amount' wasn't provided`, () => {
+  it(`function should fill the tank fully 
+  if the 'amount' wasn't provided`, () => {
     const customer = {
       money: 3000,
       vehicle: {
@@ -72,7 +73,8 @@ describe('fillTank', () => {
       });
   });
 
-  it(`function should round the poured amount by discarding number to the tenth part.`, () => {
+  it(`function should round the poured amount by discarding number
+   to the tenth part.`, () => {
     const customer = {
       money: 3000,
       vehicle: {
