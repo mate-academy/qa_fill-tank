@@ -10,7 +10,7 @@ per 1 liter and `amount` of fuel the customer wants to buy.
 ```js
 customer = {
   money: 3000, // customer account balance
-  vehicle {
+  vehicle: {
     maxTankCapacity: 40, // fuel tank volume
     fuelRemains: 8, // Remaining fuel in the tank
   }
