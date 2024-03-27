@@ -11,7 +11,9 @@ describe('fillTank', () => {
     expect(fillTank).toBeInstanceOf(Function);
   });
 
-  it('should refuel the specified amount and take the appropriate amount of money',
+  it(
+    'should refuel the specified amount'
+    + 'and take the appropriate amount of money',
     () => {
       const customer = {
         money: 3000,
@@ -71,7 +73,8 @@ describe('fillTank', () => {
     expect(customer.money).toBe(0);
   });
 
-  it('should round the poured amount by discarding number to the tenth part', () => {
+  it('should round the poured amount'
+    + 'by discarding number to the tenth part', () => {
     const customer = {
       money: 3000,
       vehicle: {
@@ -85,7 +88,8 @@ describe('fillTank', () => {
     expect(customer.vehicle.fuelRemains).toBe(13.5);
   });
 
-  it('should do not pour at all if the poured amount is less than 2 liters', () => {
+  it('should do not pour at all if'
+    + 'the poured amount is less than 2 liters', () => {
     const customer = {
       money: 3000,
       vehicle: {
@@ -100,7 +104,8 @@ describe('fillTank', () => {
     expect(customer.money).toBe(3000);
   });
 
-  it('should round the price of the purchased fuel the to the nearest hundredth part', () => {
+  it('should round the price of the purchased fuel'
+    + 'to the nearest hundredth part', () => {
     const customer = {
       money: 3000,
       vehicle: {
