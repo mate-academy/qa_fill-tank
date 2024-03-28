@@ -78,30 +78,6 @@ describe('fillTank', () => {
     expect(customer).toEqual(result);
   });
 
-  // it(`'amount' is decimal with hundredth part`, () => {
-  //   const fuelPrice = 3;
-  //   const amount = 7.75;
-  //   const customer = {
-  //     money: 100,
-  //     vehicle: {
-  //       maxTankCapacity: 10,
-  //       fuelRemains: 2,
-  //     },
-  //   };
-
-  //   fillTank(customer, fuelPrice, amount);
-
-  //   const result = {
-  //     money: 76.75,
-  //     vehicle: {
-  //       maxTankCapacity: 10,
-  //       fuelRemains: 9.75,
-  //     },
-  //   };
-
-  //   expect(customer).toEqual(result);
-  // });
-
   it(`should round the poured amount of fuel to the tenth part`, () => {
     const fuelPrice = 2;
     const amountA = 4.55;
