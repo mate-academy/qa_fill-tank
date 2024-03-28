@@ -78,7 +78,7 @@ describe('fillTank', () => {
     expect(customer).toEqual(result);
   });
 
-  // it(`'amount' is decimal`, () => {
+  // it(`'amount' is decimal with hundredth part`, () => {
   //   const fuelPrice = 3;
   //   const amount = 7.75;
   //   const customer = {
