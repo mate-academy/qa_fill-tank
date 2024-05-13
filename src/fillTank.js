@@ -26,6 +26,7 @@ function fillTank(customer, fuelPrice, amount = Infinity) {
 
   customer.vehicle.fuelRemains += roundedAmount;
   customer.money -= roundPrice(roundedAmount * fuelPrice);
+  customer.money = +customer.money.toFixed(2);
 }
 
 function roundFuel(fuel) {
