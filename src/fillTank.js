@@ -11,7 +11,7 @@
  *
  * @param {Customer} customer
  * @param {number} fuelPrice
- * @param {number} amount
+ * @param {number} [amount=Infinity]
  */
 function fillTank(customer, fuelPrice, amount = Infinity) {
   const { vehicle } = customer;
@@ -24,14 +24,24 @@ function fillTank(customer, fuelPrice, amount = Infinity) {
     return;
   }
 
-  customer.vehicle.fuelRemains += roundedAmount;
+  vehicle.fuelRemains += roundedAmount;
   customer.money -= roundPrice(roundedAmount * fuelPrice);
 }
 
+/**
+ * Rounds the fuel amount to the nearest tenth.
+ * @param {number} fuel
+ * @returns {number}
+ */
 function roundFuel(fuel) {
   return Math.floor(fuel * 10) / 10;
 }
 
+/**
+ * Rounds the price to the nearest hundredth.
+ * @param {number} price
+ * @returns {number}
+ */
 function roundPrice(price) {
   return Math.round(price * 100) / 100;
 }
