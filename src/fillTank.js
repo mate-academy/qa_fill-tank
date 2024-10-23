@@ -1,18 +1,18 @@
 'use strict';
 
 /**
- * @typedef {Object} Vehicle
- * @property {number} maxTankCapacity
- * @property {number} fuelRemains
- *
- * @typedef {Object} Customer
- * @property {number} money
- * @property {Vehicle} vehicle
- *
- * @param {Customer} customer
- * @param {number} fuelPrice
- * @param {number} amount
- */
+* @typedef {Object} Vehicle
+* @property {number} maxTankCapacity
+* @property {number} fuelRemains
+*
+* @typedef {Object} Customer
+* @property {number} money
+* @property {Vehicle} vehicle
+*
+* @param {Customer} customer
+* @param {number} fuelPrice
+* @param {number} amount
+*/
 function fillTank(customer, fuelPrice, amount = Infinity) {
   const { vehicle } = customer;
   const freeSpace = vehicle.maxTankCapacity - vehicle.fuelRemains;
@@ -26,10 +26,11 @@ function fillTank(customer, fuelPrice, amount = Infinity) {
 
   customer.vehicle.fuelRemains += roundedAmount;
   customer.money -= roundPrice(roundedAmount * fuelPrice);
+  customer.money = +customer.money.toFixed(2);
 }
 
 function roundFuel(fuel) {
-  return Math.floor(fuel * 10) / 10;
+  return Math.floor(fuel * 10) / 10; // 5.64 * 10 / 10
 }
 
 function roundPrice(price) {
