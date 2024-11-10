@@ -20,12 +20,41 @@ function fillTank(customer, fuelPrice, amount = Infinity) {
   const requiredAmount = Math.min(amount, freeSpace, canBuy);
   const roundedAmount = roundFuel(requiredAmount);
 
-  if (roundedAmount < 2) {
+  if (amount <= 0) {
+    return `Fuel amount must be greater than '0'`;
+  }
+
+  if (fuelPrice <= 0) {
+    return `Fuel price must be greater than '0'`;
+  }
+
+  if (canBuy < 1) {
+    return 'You are not have enough money';
+  }
+
+  if (customer.vehicle.maxTankCapacity <= 0) {
+    return `Tank capacity must be greater than '0'`;
+  }
+
+  if (freeSpace === 0) {
+    return 'Fuel tank is full';
+  }
+
+  if (freeSpace < 0) {
+    return 'The fuel level sensor is broken';
+  }
+
+  if (roundedAmount < 2 || amount === 2) {
     return;
   }
 
   customer.vehicle.fuelRemains += roundedAmount;
   customer.money -= roundPrice(roundedAmount * fuelPrice);
+
+  // If remainder is less than 1, must round to two decimal places
+  if (customer.money < 1) {
+    customer.money = Math.round(customer.money * 100) / 100;
+  }
 }
 
 function roundFuel(fuel) {
