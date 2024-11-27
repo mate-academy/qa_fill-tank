@@ -16,9 +16,11 @@ describe('fillTank', () => {
         fuelRemains: 8,
       },
     };
+
+    const fuelPrice = 4;
     const expectedResult = 40;
 
-    fillTank(customer, 4);
+    fillTank(customer, fuelPrice);
 
     expect(customer.vehicle.fuelRemains).toBe(expectedResult);
   });
@@ -32,9 +34,12 @@ describe('fillTank', () => {
         fuelRemains: 8,
       },
     };
+
+    const fuelPrice = 4;
+    const amount = 90;
     const expectedResult = 40;
 
-    fillTank(customer, 4, 90);
+    fillTank(customer, fuelPrice, amount);
 
     expect(customer.vehicle.fuelRemains).toBe(expectedResult);
   });
@@ -47,6 +52,10 @@ describe('fillTank', () => {
         fuelRemains: 8,
       },
     };
+
+    const fuelPrice = 600;
+    const amount = 30;
+
     const expectedResult = {
       money: 0,
       vehicle: {
@@ -55,7 +64,7 @@ describe('fillTank', () => {
       },
     };
 
-    fillTank(customer, 600, 30);
+    fillTank(customer, fuelPrice, amount);
 
     expect(customer).toEqual(expectedResult);
   });
@@ -69,9 +78,12 @@ describe('fillTank', () => {
         fuelRemains: 8,
       },
     };
+
+    const fuelPrice = 8;
+    const amount = 5.599;
     const expectedResult = 13.5;
 
-    fillTank(customer, 8, 5.599);
+    fillTank(customer, fuelPrice, amount);
 
     expect(customer.vehicle.fuelRemains).toBe(expectedResult);
   });
@@ -84,9 +96,12 @@ describe('fillTank', () => {
         fuelRemains: 8,
       },
     };
+
+    const fuelPrice = 8;
+    const amount = 1;
     const expectedResult = 8;
 
-    fillTank(customer, 8, 1);
+    fillTank(customer, fuelPrice, amount);
 
     expect(customer.vehicle.fuelRemains).toBe(expectedResult);
   });
@@ -100,9 +115,12 @@ describe('fillTank', () => {
         fuelRemains: 8,
       },
     };
+
+    const fuelPrice = 8.5698576495;
+    const amount = 5;
     const expectedResult = 2957.15;
 
-    fillTank(customer, 8.5698576495, 5);
+    fillTank(customer, fuelPrice, amount);
 
     expect(customer.money).toBe(expectedResult);
   });
