@@ -14,10 +14,20 @@
  * @param {number} amount
  */
 function fillTank(customer, fuelPrice, amount = Infinity) {
+  if (isNaN(fuelPrice)) {
+    throw Error(`fuelPrice shouldn't be NaN`);
+  }
+
   const { vehicle } = customer;
   const freeSpace = vehicle.maxTankCapacity - vehicle.fuelRemains;
   const canBuy = customer.money / fuelPrice;
-  const requiredAmount = Math.min(amount, freeSpace, canBuy);
+
+  let requiredAmount = Math.min(amount, freeSpace, canBuy);
+
+  if (isNaN(amount)) {
+    requiredAmount = Math.min(Infinity, freeSpace, canBuy);
+  }
+
   const roundedAmount = roundFuel(requiredAmount);
 
   if (roundedAmount < 2) {
