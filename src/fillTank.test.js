@@ -3,8 +3,7 @@
 describe('fillTank', () => {
   const { fillTank } = require('./fillTank');
 
-  // eslint-disable-next-line max-len
-  it('should full tank is ordered if the `amount` is not given', () => {
+  it('should fill tank completely if the `amount` is not given', () => {
     const customer = {
       money: 3000,
       vehicle: {
@@ -83,7 +82,7 @@ describe('fillTank', () => {
   });
 
   // eslint-disable-next-line max-len
-  it('should round the price of the purchased fuel the to the nearest hundredth part', () => {
+  it('should round the price of the purchased fuel to the nearest hundredth part', () => {
     const customer = {
       money: 1000,
       vehicle: {
