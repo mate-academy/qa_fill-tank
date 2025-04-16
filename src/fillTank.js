@@ -35,5 +35,6 @@ function roundFuel(fuel) {
 function roundPrice(price) {
   return Math.round(price * 100) / 100;
 }
+// 8
 
 module.exports = { fillTank };
