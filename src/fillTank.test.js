@@ -9,7 +9,7 @@ function roundPrice(value) {
 
 // Helper function to round fuel to the nearest tenth
 function roundFuel(value) {
-  return Math.round(value * 10) / 10;
+  return Math.floor(value * 10) / 10;
 }
 
 describe('fillTank', () => {
