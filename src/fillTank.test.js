@@ -51,16 +51,14 @@ describe('fillTank', () => {
 
     fillTank(customer, 10); // Fuel price: 10 per liter
 
-    expect(customer.vehicle.fuelRemains)
-      .toBe(8 + roundFuel(50 / 10)); // Should only pour 5 liters
+    expect(customer.vehicle.fuelRemains).toBe(8 + roundFuel(50 / 10));
     expect(customer.money).toBe(0);
   });
 
   it('should correctly round the poured amount to the nearest tenth', () => {
     fillTank(customer, 10, 7.67); // Amount requested: 7.67 liters
 
-    expect(customer.vehicle.fuelRemains)
-      .toBe(8 + roundFuel(7.67));
+    expect(customer.vehicle.fuelRemains).toBe(8 + roundFuel(7.67));
   });
 
   it('should not pour fuel if calculated amount is less than 2 liters', () => {
