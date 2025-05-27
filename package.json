@@ -20,10 +20,19 @@
     "eslint": "^5.16.0",
     "eslint-plugin-jest": "^22.4.1",
     "eslint-plugin-node": "^8.0.1",
-    "jest": "^24.7.0"
+    "eslint-plugin-prettier": "^3.1.4",
+    "jest": "^24.9.0"
   },
   "mateAcademy": {
     "projectType": "javascript"
   },
-  "dependencies": {}
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YesupenkoVladislav/qa_fill-tank.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/YesupenkoVladislav/qa_fill-tank/issues"
+  },
+  "homepage": "https://github.com/YesupenkoVladislav/qa_fill-tank#readme"
 }
