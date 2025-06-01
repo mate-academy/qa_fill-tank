@@ -4,11 +4,15 @@
  * @typedef {Object} Vehicle
  * @property {number} maxTankCapacity
  * @property {number} fuelRemains
- *
+ */
+
+/**
  * @typedef {Object} Customer
  * @property {number} money
  * @property {Vehicle} vehicle
- *
+ */
+
+/**
  * @param {Customer} customer
  * @param {number} fuelPrice
  * @param {number} amount
