@@ -1,39 +1,36 @@
 'use strict';
 
 /**
- * @typedef {Object} Vehicle
- * @property {number} maxTankCapacity
- * @property {number} fuelRemains
- *
- * @typedef {Object} Customer
- * @property {number} money
- * @property {Vehicle} vehicle
- *
- * @param {Customer} customer
+ * @param {Object} customer
  * @param {number} fuelPrice
- * @param {number} amount
+ * @param {number} [amount]
  */
-function fillTank(customer, fuelPrice, amount = Infinity) {
+function fillTank(customer, fuelPrice, amount) {
   const { vehicle } = customer;
-  const freeSpace = vehicle.maxTankCapacity - vehicle.fuelRemains;
-  const canBuy = customer.money / fuelPrice;
-  const requiredAmount = Math.min(amount, freeSpace, canBuy);
-  const roundedAmount = roundFuel(requiredAmount);
+  const maxPourable = vehicle.maxTankCapacity - vehicle.fuelRemains;
 
-  if (roundedAmount < 2) {
+  // Якщо кількість не вказано — залити до повного
+  const requestedLiters = amount !== undefined ? amount : maxPourable;
+
+  // Не лити більше, ніж вміститься
+  let litersToPour = Math.min(requestedLiters, maxPourable);
+
+  // Скільки клієнт реально може купити
+  const affordableLiters = Math.floor((customer.money / fuelPrice) * 10) / 10;
+
+  // Лити тільки те, що він може оплатити
+  litersToPour = Math.min(litersToPour, affordableLiters);
+
+  // Не лити, якщо < 2 літрів
+  if (litersToPour < 2) {
     return;
   }
 
-  customer.vehicle.fuelRemains += roundedAmount;
-  customer.money -= roundPrice(roundedAmount * fuelPrice);
+  // Вартість = округлення до 0.01
+  const totalCost = Math.round(litersToPour * fuelPrice * 100) / 100;
+
+  vehicle.fuelRemains += litersToPour;
+  customer.money -= totalCost;
 }
 
-function roundFuel(fuel) {
-  return Math.floor(fuel * 10) / 10;
-}
-
-function roundPrice(price) {
-  return Math.round(price * 100) / 100;
-}
-
-module.exports = { fillTank };
+module.exports = fillTank;
