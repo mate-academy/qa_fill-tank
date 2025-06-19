@@ -16,7 +16,6 @@ customer = {
   }
 }
 ```
-
 The function should return nothing, but only refills fuel and withdraws money,
 following the next rules:
 
