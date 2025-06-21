@@ -1,5 +1,7 @@
 'use strict';
 
+// implementation
+
 /**
  * @typedef {Object} Vehicle
  * @property {number} maxTankCapacity
