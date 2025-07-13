@@ -1,8 +1,8 @@
 'use strict';
 
-describe('fillTank', () => {
-  const { fillTank } = require('./fillTank');
+const { fillTank } = require('./fillTank');
 
+describe('fillTank', () => {
   it(`should full tank is ordered if amount is not given`, () => {
     const customer = {
       money: 5000,
@@ -32,7 +32,7 @@ describe('fillTank', () => {
     expect(customer.vehicle.fuelRemains).toEqual(40);
   });
 
-  it(`should fuelRemains is 18 if amount is money`, () => {
+  it(`should fill in only what the client can pay`, () => {
     const customer = {
       money: 1000,
       vehicle: {
