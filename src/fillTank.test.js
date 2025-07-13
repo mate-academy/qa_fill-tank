@@ -3,7 +3,7 @@
 const { fillTank } = require('./fillTank');
 
 describe('fillTank', () => {
-  it(`should full tank is ordered if amount is not given`, () => {
+  it(`should full tank`, () => {
     const customer = {
       money: 5000,
       vehicle: {
