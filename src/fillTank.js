@@ -19,21 +19,20 @@ function fillTank(customer, fuelPrice, amount = Infinity) {
   const canBuy = customer.money / fuelPrice;
   const requiredAmount = Math.min(amount, freeSpace, canBuy);
   const roundedAmount = roundFuel(requiredAmount);
-  const preciseMoneyCalculation = (function () {
+  const preciseMoneyCalculation = (function() {
     const priceInCents = roundPrice(fuelPrice) * 100;
     const amountInDecilitre = roundedAmount * 10;
     const toSubtractInCents = (priceInCents * amountInDecilitre) / 10;
     const moneyInCents = customer.money * 100;
-    
+
     return (moneyInCents - toSubtractInCents) / 100;
   })();
-
-    customer.money = preciseMoneyCalculation;
 
   if (roundedAmount < 2) {
     return;
   }
 
+  customer.money = preciseMoneyCalculation;
   customer.vehicle.fuelRemains += roundedAmount;
 }
 
