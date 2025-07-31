@@ -8,7 +8,6 @@ describe('fillTank', () => {
   });
 
   it('should fill full tank if amount is not specified', () => {
-
     const customer = {
       money: 400,
       vehicle: {
@@ -37,9 +36,9 @@ describe('fillTank', () => {
 
     expect(customer.vehicle.fuelRemains).toBe(15);
     expect(customer.money).toBe(70);
-});
+  });
 
-it('should do nothing with zero money', () => {
+  it('should do nothing with zero money', () => {
     const customer = {
       money: 0,
       vehicle: {
