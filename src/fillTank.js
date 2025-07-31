@@ -13,6 +13,7 @@
  * @param {number} fuelPrice
  * @param {number} amount
  */
+// -
 function fillTank(customer, fuelPrice, amount = Infinity) {
   const { vehicle } = customer;
   const freeSpace = vehicle.maxTankCapacity - vehicle.fuelRemains;
