@@ -11,7 +11,7 @@
  *
  * @param {Customer} customer
  * @param {number} fuelPrice
- * @param {number} amount
+ * @param {number} [amount]
  */
 function fillTank(customer, fuelPrice, amount = Infinity) {
   const { vehicle } = customer;
