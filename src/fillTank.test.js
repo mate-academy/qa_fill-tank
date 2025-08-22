@@ -64,7 +64,8 @@ describe('fillTank', () => {
     });
   });
 
-  it(`fill full tank if client has enoght money and hasn't amount value`, () => {
+  it(`fill full tank if client has enoght money 
+    and hasn't amount value`, () => {
     const customer = {
       money: 3000,
       vehicle: {
