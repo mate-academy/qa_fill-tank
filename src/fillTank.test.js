@@ -123,4 +123,45 @@ describe('fillTank', () => {
       },
     });
   });
+
+  it(`should calculate correctly, if 'fuelRemains' > 0`, () => {
+    const customer = {
+      money: 1000,
+      vehicle: {
+        maxTankCapacity: 40,
+        fuelRemains: 20.1,
+      },
+    };
+
+    fillTank(customer, 10, 5.5);
+
+    expect(customer).toStrictEqual({
+      money: 945,
+      vehicle: {
+        maxTankCapacity: 40,
+        fuelRemains: 25.6,
+      },
+    });
+  });
+
+  it(`should not pour at all when 'amount' < 2,
+        even if customer has enough money`, () => {
+    const customer = {
+      money: 15,
+      vehicle: {
+        maxTankCapacity: 40,
+        fuelRemains: 20.1,
+      },
+    };
+
+    fillTank(customer, 10, 1.5);
+
+    expect(customer).toStrictEqual({
+      money: 15,
+      vehicle: {
+        maxTankCapacity: 40,
+        fuelRemains: 20.1,
+      },
+    });
+  });
 });
