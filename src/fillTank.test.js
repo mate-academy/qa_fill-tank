@@ -164,4 +164,25 @@ describe('fillTank', () => {
       },
     });
   });
+
+  it(`should not pour at all when 'amount' > 2,
+        but customer can not afford on more than 2 liters`, () => {
+    const customer = {
+      money: 15,
+      vehicle: {
+        maxTankCapacity: 40,
+        fuelRemains: 20.1,
+      },
+    };
+
+    fillTank(customer, 10, 50);
+
+    expect(customer).toStrictEqual({
+      money: 15,
+      vehicle: {
+        maxTankCapacity: 40,
+        fuelRemains: 20.1,
+      },
+    });
+  });
 });
