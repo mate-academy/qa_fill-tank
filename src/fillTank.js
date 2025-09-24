@@ -17,23 +17,22 @@ function fillTank(customer, fuelPrice, amount = Infinity) {
   const { vehicle } = customer;
   const freeSpace = vehicle.maxTankCapacity - vehicle.fuelRemains;
   const canBuy = customer.money / fuelPrice;
-  const requiredAmount = Math.min(amount, freeSpace, canBuy);
-  const roundedAmount = roundFuel(requiredAmount);
 
-  if (roundedAmount < 2) {
+  // ile faktycznie można nalać
+  let litersToPour = Math.min(amount, freeSpace, canBuy);
+
+  // zaokrąglanie w dół do 1 miejsca po przecinku
+  litersToPour = Math.floor(litersToPour * 10) / 10;
+
+  // minimalne nalanie 2 L
+  if (litersToPour < 2) {
     return;
   }
 
-  customer.vehicle.fuelRemains += roundedAmount;
-  customer.money -= roundPrice(roundedAmount * fuelPrice);
-}
-
-function roundFuel(fuel) {
-  return Math.floor(fuel * 10) / 10;
-}
-
-function roundPrice(price) {
-  return Math.round(price * 100) / 100;
+  // nalewamy i aktualizujemy pieniądze
+  vehicle.fuelRemains += litersToPour;
+  const cost = Math.round(litersToPour * fuelPrice * 100) / 100;
+  customer.money -= cost;
 }
 
 module.exports = { fillTank };
