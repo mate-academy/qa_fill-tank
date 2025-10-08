@@ -1,11 +1,94 @@
 'use strict';
 
 describe('fillTank', () => {
-  // const { fillTank } = require('./fillTank');
+  const { fillTank } = require('./fillTank');
 
-  it('should ', () => {
+  let customer;
 
+  beforeEach(() => {
+    customer = {
+      money: 3000,
+      vehicle: {
+        maxTankCapacity: 40,
+        fuelRemains: 8,
+      },
+    };
   });
 
-  // write tests here
+  it('should fill full tank when amount is not provided', () => {
+    const fuelPrice = 50;
+
+    fillTank(customer, fuelPrice);
+
+    expect(customer.vehicle.fuelRemains).toBe(40);
+    expect(customer.money).toBeCloseTo(1400, 2);
+  });
+
+  it('should not exceed max tank capacity when amount is too large', () => {
+    const fuelPrice = 10;
+
+    fillTank(customer, fuelPrice, 100);
+
+    expect(customer.vehicle.fuelRemains).toBe(40);
+    expect(customer.money).toBeCloseTo(2600, 2);
+  });
+
+  it('should fill only what customer can pay for', () => {
+    customer.money = 100;
+
+    const fuelPrice = 50;
+
+    fillTank(customer, fuelPrice, 10);
+
+    expect(customer.vehicle.fuelRemains).toBe(10);
+    expect(customer.money).toBeCloseTo(0, 2);
+  });
+
+  it('should not pour if rounded amount is less than 2 liters', () => {
+    customer.money = 50;
+
+    const fuelPrice = 50;
+
+    fillTank(customer, fuelPrice, 10);
+
+    expect(customer.vehicle.fuelRemains).toBe(8);
+    expect(customer.money).toBe(50);
+  });
+
+  it('should round poured amount down to one decimal', () => {
+    const fuelPrice = 20;
+
+    fillTank(customer, fuelPrice, 3.789);
+
+    expect(customer.vehicle.fuelRemains).toBeCloseTo(11.7, 2);
+    expect(customer.money).toBeCloseTo(2926, 2);
+  });
+
+  it('should round total fuel cost to two decimals', () => {
+    const fuelPrice = 33.3333;
+
+    fillTank(customer, fuelPrice, 3);
+
+    expect(customer.money).toBeCloseTo(2900, 2);
+  });
+
+  it('should do nothing if customer already has full tank', () => {
+    customer.vehicle.fuelRemains = 40;
+
+    const fuelPrice = 10;
+
+    fillTank(customer, fuelPrice, 5);
+
+    expect(customer.vehicle.fuelRemains).toBe(40);
+    expect(customer.money).toBe(3000);
+  });
+
+  it('should handle situation when fuel price is very high', () => {
+    const fuelPrice = 2000;
+
+    fillTank(customer, fuelPrice, 10);
+
+    expect(customer.vehicle.fuelRemains).toBe(8);
+    expect(customer.money).toBe(3000);
+  });
 });
