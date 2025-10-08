@@ -21,7 +21,7 @@ describe('fillTank', () => {
     fillTank(customer, fuelPrice);
 
     expect(customer.vehicle.fuelRemains).toBe(40);
-    expect(customer.money).toBeCloseTo(1400, 2);
+    expect(customer.money).toBe(1400);
   });
 
   it('should not exceed max tank capacity when amount is too large', () => {
@@ -30,7 +30,7 @@ describe('fillTank', () => {
     fillTank(customer, fuelPrice, 100);
 
     expect(customer.vehicle.fuelRemains).toBe(40);
-    expect(customer.money).toBeCloseTo(2600, 2);
+    expect(customer.money).toBe(2680);
   });
 
   it('should fill only what customer can pay for', () => {
@@ -41,7 +41,7 @@ describe('fillTank', () => {
     fillTank(customer, fuelPrice, 10);
 
     expect(customer.vehicle.fuelRemains).toBe(10);
-    expect(customer.money).toBeCloseTo(0, 2);
+    expect(customer.money).toBe(0);
   });
 
   it('should not pour if rounded amount is less than 2 liters', () => {
