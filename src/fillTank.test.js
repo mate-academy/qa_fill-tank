@@ -18,7 +18,9 @@ describe('fillTank', () => {
   it('should fill full tank when amount is not provided', () => {
     const fuelPrice = 50;
 
-    fillTank(customer, fuelPrice);
+    const result = fillTank(customer, fuelPrice);
+
+    expect(result).toBeUndefined();
 
     expect(customer.vehicle.fuelRemains).toBe(40);
     expect(customer.money).toBe(1400);
