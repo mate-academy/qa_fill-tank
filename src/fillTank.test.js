@@ -67,4 +67,32 @@ describe('fillTank', () => {
     expect(customer.vehicle.fuelRemains).toBeCloseTo(8 + 25);
     expect(customer.money).toBeCloseTo(0, 2);
   });
+
+  test('fills when rounded amount equals exactly 2.0L', () => {
+    customer = {
+      money: 1000,
+      vehicle: {
+        maxTankCapacity: 50, fuelRemains: 10,
+      },
+    };
+
+    // Request amount that after flooring gives exactly 2.0L
+    fillTank(customer, 10, 2.05);
+    expect(customer.vehicle.fuelRemains).toBeCloseTo(12);
+    expect(customer.money).toBeCloseTo(1000 - (2.0 * 10), 2);
+  });
+
+  test('does nothing if tank is already full', () => {
+    customer = {
+      money: 1000,
+      vehicle: {
+        maxTankCapacity: 40, fuelRemains: 40,
+      },
+    };
+
+    fillTank(customer, 10, 5);
+    // Expect no changes
+    expect(customer.vehicle.fuelRemains).toBe(40);
+    expect(customer.money).toBe(1000);
+  });
 });
