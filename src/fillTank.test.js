@@ -28,7 +28,7 @@ describe('fillTank', () => {
     expect(customer.money).toBe(3); // unchanged
   });
 
-  it('should respect the amount parameter if less than free space and money allows', () => {
+  it('respects amount when less than free space and money allows', () => {
     fillTank(customer, 2, 5); // request 5 liters
     expect(customer.vehicle.fuelRemains).toBe(15); // 10 + 5
     expect(customer.money).toBe(90); // 100 - 5*2
