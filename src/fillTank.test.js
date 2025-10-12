@@ -21,7 +21,7 @@ describe('fillTank', () => {
     expect(customer.money).toBeCloseTo(20);
   });
 
-  it('truncates and fills requested amount when < free space and affordable', () => { ... }); 
+  it('truncates and fills amount if below free space and affordable', () => {
     fillTank(customer, 2, 5);
     expect(customer.vehicle.fuelRemains).toBeCloseTo(15);
     expect(customer.money).toBeCloseTo(90);
