@@ -15,36 +15,96 @@ describe('fillTank', () => {
     };
   });
 
-  it('should fill tank up to the free space when amount is Infinity', () => {
-    fillTank(customer, 2); // fuelPrice = 2
-    expect(customer.vehicle.fuelRemains).toBe(50); // 10 + 40 free space
-    expect(customer.money).toBeCloseTo(20); // 100 - 40*2 = 20
+  it('fills tank to full when amount not provided', () => {
+    fillTank(customer, 2); // amount not provided
+    expect(customer.vehicle.fuelRemains).toBeCloseTo(50);
+    expect(customer.money).toBeCloseTo(20);
   });
 
-  it('should not fill tank if calculated amount < 2 liters', () => {
+  it('fills tank up to requested amount if less than free space and affordable', () => {
+    fillTank(customer, 2, 5);
+    expect(customer.vehicle.fuelRemains).toBeCloseTo(15);
+    expect(customer.money).toBeCloseTo(90);
+  });
+
+  it('caps fill when amount exceeds free space', () => {
+    fillTank(customer, 2, 100);
+    expect(customer.vehicle.fuelRemains).toBeCloseTo(50);
+    expect(customer.money).toBeCloseTo(20);
+  });
+
+  it('fills exactly free space when amount equals free space', () => {
+    fillTank(customer, 2, 40);
+    expect(customer.vehicle.fuelRemains).toBeCloseTo(50);
+    expect(customer.money).toBeCloseTo(20);
+  });
+
+  it('truncates fuel to 0.1 (discard extra precision)', () => {
+    customer.money = 10;
+    customer.vehicle.fuelRemains = 0;
+    fillTank(customer, 3); // 10/3 ≈ 3.333 → 3.3
+    expect(customer.vehicle.fuelRemains).toBeCloseTo(3.3);
+  });
+
+  it('rounds price to 2 decimal places correctly', () => {
+    customer.money = 10;
+    customer.vehicle.fuelRemains = 0;
+    fillTank(customer, 3); // fuel = 3.3 → cost = 9.9
+    expect(customer.money).toBeCloseTo(0.10);
+  });
+
+  it('rounds price correctly near 0.005 boundary - down', () => {
+    customer.money = 10.004;
+    customer.vehicle.fuelRemains = 0;
+    fillTank(customer, 1); // 10.004/1 = 10.004 L → truncated 10.0
+    expect(customer.money).toBeCloseTo(0.00);
+  });
+
+  it('rounds price correctly near 0.005 boundary - up', () => {
+    customer.money = 10.005;
+    customer.vehicle.fuelRemains = 0;
+    fillTank(customer, 1); // 10.005 L → truncated 10.0
+    expect(customer.money).toBeCloseTo(0.01);
+  });
+
+  it('does not fill tank if truncated amount < 2.0 L', () => {
     customer.money = 3;
-    fillTank(customer, 2); // canBuy = 1.5 < 2
-    expect(customer.vehicle.fuelRemains).toBe(10); // unchanged
-    expect(customer.money).toBe(3); // unchanged
+    fillTank(customer, 2); // can buy 1.5 L < 2 → no fill
+    expect(customer.vehicle.fuelRemains).toBeCloseTo(10);
+    expect(customer.money).toBeCloseTo(3);
   });
 
-  it('respects amount when less than free space and money allows', () => {
-    fillTank(customer, 2, 5); // request 5 liters
-    expect(customer.vehicle.fuelRemains).toBe(15); // 10 + 5
-    expect(customer.money).toBe(90); // 100 - 5*2
+  it('fills minimum 2.0 L if truncation allows', () => {
+    customer.money = 4.1;
+    fillTank(customer, 2); // 4.1/2 = 2.05 → truncated 2.0 → pour
+    expect(customer.vehicle.fuelRemains).toBeCloseTo(12);
+    expect(customer.money).toBeCloseTo(0.1);
   });
 
-  it('should round fuel to nearest 0.1', () => {
-    customer.money = 10;
-    customer.vehicle.fuelRemains = 0;
-    fillTank(customer, 3); // canBuy = 10/3 ≈ 3.333
-    expect(customer.vehicle.fuelRemains).toBe(3.3); // rounded down
+  it('does nothing if tank already full', () => {
+    customer.vehicle.fuelRemains = 50;
+    fillTank(customer, 2, 10);
+    expect(customer.vehicle.fuelRemains).toBeCloseTo(50);
+    expect(customer.money).toBeCloseTo(100);
   });
 
-  it('should round price to 2 decimal places', () => {
-    customer.money = 10;
-    customer.vehicle.fuelRemains = 0;
-    fillTank(customer, 3); // fuel 3.3 * 3 = 9.9
-    expect(customer.money).toBeCloseTo(0.1); // 10 - 9.9
+  it('does nothing if customer has no money', () => {
+    customer.money = 0;
+    fillTank(customer, 2, 10);
+    expect(customer.vehicle.fuelRemains).toBeCloseTo(10);
+    expect(customer.money).toBeCloseTo(0);
+  });
+
+  it('does nothing if insufficient funds to buy at least 2 L', () => {
+    customer.money = 3.9;
+    fillTank(customer, 2, 10); // can buy 1.95 → truncated 1.9 < 2 → no fill
+    expect(customer.vehicle.fuelRemains).toBeCloseTo(10);
+    expect(customer.money).toBeCloseTo(3.9);
+  });
+
+  it('returns undefined explicitly', () => {
+    const result = fillTank(customer, 2, 5);
+    expect(result).toBeUndefined();
   });
 });
+
