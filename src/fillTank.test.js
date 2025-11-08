@@ -30,7 +30,7 @@ describe('fillTank', () => {
       .toBe(customer.vehicle.maxTankCapacity);
   });
 
-  it('should fill up the tank when given price but no amount', () => {
+  it('should not pour more fuel than the tank can hold', () => {
     const customer = {
       money: 3000,
       vehicle: {
@@ -77,17 +77,17 @@ describe('fillTank', () => {
 
   it('rounds fuel to nearest tenth', () => {
     const customer = {
-      money: 200,
+      money: 500,
       vehicle: {
         maxTankCapacity: 40,
         fuelRemains: 8,
       },
     };
 
-    fillTank(customer, 50, 1);
+    fillTank(customer, 10, 5.55);
 
     expect(customer.vehicle.fuelRemains)
-      .toBe(8.0);
+      .toBe(13.5);
   });
 
   it('cost is rounded to nearest hundredth', () => {
