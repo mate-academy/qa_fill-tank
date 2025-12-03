@@ -18,7 +18,7 @@ function fillTank(customer, fuelPrice, amount = Infinity) {
   const freeSpace = vehicle.maxTankCapacity - vehicle.fuelRemains;
   const canBuy = customer.money / fuelPrice;
   const requiredAmount = Math.min(amount, freeSpace, canBuy);
-  const roundedAmount = roundFuel(requiredAmount);
+  const roundedAmount = roundFuel(requiredAmount); //
 
   if (roundedAmount < 2) {
     return;
@@ -26,6 +26,7 @@ function fillTank(customer, fuelPrice, amount = Infinity) {
 
   customer.vehicle.fuelRemains += roundedAmount;
   customer.money -= roundPrice(roundedAmount * fuelPrice);
+  customer.money = Number(customer.money.toFixed(1));
 }
 
 function roundFuel(fuel) {
