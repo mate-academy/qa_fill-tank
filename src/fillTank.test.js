@@ -23,7 +23,7 @@ describe('fillTank', () => {
 
   it('should fills full tank if amount is not provided', () => {
     const customer = {
-      money: 3000,
+      money: 300,
       vehicle: {
         maxTankCapacity: 40,
         fuelRemains: 8,
@@ -33,10 +33,10 @@ describe('fillTank', () => {
     fillTank(customer, 50);
 
     expect(customer).toEqual({
-      money: 1400,
+      money: 0,
       vehicle: {
         maxTankCapacity: 40,
-        fuelRemains: 40,
+        fuelRemains: 14,
       },
     });
   });
@@ -92,7 +92,13 @@ describe('fillTank', () => {
 
     fillTank(customer, 41.33, 2.343);
 
-    expect(customer.vehicle.fuelRemains).toEqual(25.6);
+    expect(customer).toEqual({
+      money: 904.94,
+      vehicle: {
+        maxTankCapacity: 40,
+        fuelRemains: 25.6,
+      },
+    });
   });
 
   it('should does NOT fill if result is less than 2 liters', () => {
@@ -124,8 +130,14 @@ describe('fillTank', () => {
       },
     };
 
-    fillTank(customer, 33.333, 10);
+    fillTank(customer, 19.567, 7.777);
 
-    expect(customer.money).toEqual(2666.67);
+    expect(customer).toEqual({
+      money: 2849.33,
+      vehicle: {
+        maxTankCapacity: 40,
+        fuelRemains: 15.7,
+      },
+    });
   });
 });
