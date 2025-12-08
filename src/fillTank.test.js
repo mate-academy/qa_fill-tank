@@ -1,7 +1,7 @@
 'use strict';
 
 describe('fillTank', () => {
-  const { fillTank } = require('./fillTank');
+  const { fillTank } = require('./fillTank.js');
 
   it('should be declared', () => {
     expect(fillTank).toBeInstanceOf(Function);
@@ -21,7 +21,7 @@ describe('fillTank', () => {
     expect(result).toBeUndefined();
   });
 
-  it('should fills full tank if amount is not provided', () => {
+  it('should pour only what customer can pay when amount is omitted', () => {
     const customer = {
       money: 300,
       vehicle: {
@@ -130,10 +130,10 @@ describe('fillTank', () => {
       },
     };
 
-    fillTank(customer, 19.567, 7.777);
+    fillTank(customer, 1.999, 7.777);
 
     expect(customer).toEqual({
-      money: 2849.33,
+      money: 2984.61,
       vehicle: {
         maxTankCapacity: 40,
         fuelRemains: 15.7,
