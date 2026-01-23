@@ -3,7 +3,6 @@
 const { fillTank } = require('./fillTank');
 
 describe('fillTank', () => {
-
   describe('basic behavior', () => {
     it('fills fuel according to available money', () => {
       const customer = {
@@ -19,6 +18,20 @@ describe('fillTank', () => {
       expect(customer.vehicle.fuelRemains).toBe(12);
     });
 
+    it('fills fuel according to available money', () => {
+      const customer = {
+        money: 30,
+        vehicle: {
+          maxTankCapacity: 40,
+          fuelRemains: 2,
+        },
+      };
+
+      fillTank(customer, 3, 20);
+
+      expect(customer.money).toBe(0);
+    });
+
     it('does nothing if customer has no money', () => {
       const customer = {
         money: 0,
@@ -31,6 +44,20 @@ describe('fillTank', () => {
       fillTank(customer, 1, 10);
 
       expect(customer.vehicle.fuelRemains).toBe(5);
+    });
+
+    it('does nothing if customer has no money', () => {
+      const customer = {
+        money: 0,
+        vehicle: {
+          maxTankCapacity: 40,
+          fuelRemains: 5,
+        },
+      };
+
+      fillTank(customer, 1, 10);
+
+      expect(customer.money).toBe(0);
     });
   });
 
@@ -79,6 +106,20 @@ describe('fillTank', () => {
       expect(customer.vehicle.fuelRemains).toBe(36);
     });
 
+      it('fills only what fits in the tank', () => {
+      const customer = {
+        money: 25,
+        vehicle: {
+          maxTankCapacity: 36,
+          fuelRemains: 31,
+        },
+      };
+
+      fillTank(customer, 5, 6);
+
+      expect(customer.money).toBe(0);
+    });
+
     it('does nothing if tank is already full', () => {
       const customer = {
         money: 50,
@@ -91,6 +132,20 @@ describe('fillTank', () => {
       fillTank(customer, 1, 10);
 
       expect(customer.vehicle.fuelRemains).toBe(40);
+    });
+
+    it('does nothing if tank is already full', () => {
+      const customer = {
+        money: 50,
+        vehicle: {
+          maxTankCapacity: 40,
+          fuelRemains: 40,
+        },
+      };
+
+      fillTank(customer, 1, 10);
+
+      expect(customer.money).toBe(50);
     });
   });
 
@@ -168,6 +223,19 @@ describe('fillTank', () => {
 
       expect(customer.vehicle.fuelRemains).toBe(10);
     });
-  });
 
+    it('does not fill if calculated fuel is less than 2 units', () => {
+      const customer = {
+        money: 3,
+        vehicle: {
+          maxTankCapacity: 40,
+          fuelRemains: 10,
+        },
+      };
+
+      fillTank(customer, 2, 10);
+
+      expect(customer.money).toBe(3);
+    });
+  });
 });
