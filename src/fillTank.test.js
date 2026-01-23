@@ -45,7 +45,7 @@ describe('fillTank', () => {
       fillTank(customer, 2.94, 30);
 
       expect(customer.vehicle.fuelRemains).toBe(9.9);
-      expect(customer.money).toBeCloseTo(0.0, 1);
+      expect(customer.money).toBeCloseTo(0.1);
     });
 
     it('fills exact ordered amount if customer can afford it', () => {
@@ -125,19 +125,19 @@ describe('fillTank', () => {
 
   describe('rounding rules', () => {
     it(`rounds fueled amount down to one decimal place and deducts money`,
-     () => {
-      const customer = {
-        money: 10,
-        vehicle: {
-          maxTankCapacity: 40, fuelRemains: 0,
-        },
-      };
+      () => {
+        const customer = {
+          money: 10,
+          vehicle: {
+            maxTankCapacity: 40, fuelRemains: 0,
+          },
+        };
 
-      fillTank(customer, 1.67, 10);
+        fillTank(customer, 1.67, 10);
 
-      expect(customer.vehicle.fuelRemains).toBe(5.9);
-      expect(customer.money).toBeCloseTo(0.13, 2);
-    });
+        expect(customer.vehicle.fuelRemains).toBe(5.9);
+        expect(customer.money).toBeCloseTo(0.15, 2);
+      });
   });
 
   describe('validation and edge cases', () => {
