@@ -48,14 +48,14 @@ describe('fillTank', () => {
 
   it('rounds poured amount down to one decimal place', () => {
     const customer = {
-      money: 1000,
+      money: 5000,
       vehicle: {
-        maxTankCapacity: 40, fuelRemains: 20,
+        maxTankCapacity: 100, fuelRemains: 10,
       },
     };
 
     fillTank(customer, 30, 20.987);
-    expect(customer.vehicle.fuelRemains).toBe(40);
+    expect(customer.vehicle.fuelRemains).toBe(30.9);
   });
 
   it('does not pour if rounded amount is less than 2 liters', () => {
