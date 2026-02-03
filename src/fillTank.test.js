@@ -1,13 +1,13 @@
 "use strict";
 
-describe("fillTank", () => {
-  const { fillTank } = require("./fillTank");
+describe(`fillTank`, () => {
+  const { fillTank } = require(`./fillTank`);
 
-  it("should be a function", () => {
+  it(`should be a function`, () => {
     expect(fillTank).toBeInstanceOf(Function);
   });
 
-  it("should return nothing", () => {
+  it(`should return nothing`, () => {
     const customer = {
       money: 3000,
       vehicle: {
@@ -15,9 +15,22 @@ describe("fillTank", () => {
         fuelRemains: 8,
       },
     };
-    const result = fillTank(customer, 10, 40);
 
-    expect(result).toBe(undefined);
+    expect(fillTank(customer, 10, 40)).toBe(undefined);
+  });
+
+  it(`ALWAYS fill in only what the client can pay`, () => {
+    const customer = {
+      money: 100,
+      vehicle: {
+        maxTankCapacity: 40,
+        fuelRemains: 8,
+      },
+    };
+
+    fillTank(customer, 10, 20);
+
+    expect(customer.vehicle.fuelRemains).toBe(18);
   });
 
   it(`If the amount is not given,
@@ -79,7 +92,8 @@ describe("fillTank", () => {
     expect(customer.vehicle.fuelRemains).toBe(8);
   });
 
-  it(`If the poured amount is less than 2 liters, do not pour at all`, () => {
+  it(`Round the price of the purchased fuel
+  the to the nearest hundredth part`, () => {
     const customer = {
       money: 3000,
       vehicle: {
