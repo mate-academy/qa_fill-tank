@@ -32,7 +32,7 @@ test('does not overfill the tank when requested amount exceeds capacity', () => 
   expect(customer.money).toBe(3000 - 10 * 10);
 });
 
-test('fills only the amount the customer can afford', () => {
+test('fills only the amount the customer can afford, discarding to the tenth part', () => {
   const customer = {
     money: 100,
     vehicle: {
@@ -43,8 +43,8 @@ test('fills only the amount the customer can afford', () => {
 
   fillTank(customer, 30, 10);
 
-  expect(customer.vehicle.fuelRemains).toBe(3);
-  expect(customer.money).toBe(10);
+  expect(customer.vehicle.fuelRemains).toBe(3.3);
+  expect(customer.money).toBe(1);
 });
 
 test('rounds poured fuel amount by discarding to the tenth part', () => {
@@ -87,7 +87,7 @@ test('rounds fuel price cost to the nearest hundredth', () => {
 
   fillTank(customer, 33.333, 3);
 
-  expect(customer.money).toBeCloseTo(0.01, 2);
+  expect(customer.money).toBe(0);
 });
 
 test('returns nothing', () => {
