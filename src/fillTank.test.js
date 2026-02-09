@@ -110,5 +110,49 @@ describe('fillTank', () => {
     expect(fuelRemainsBefore).toEqual(fuelRemainsAfter);
   });
 
+  it('should work when amount is omitted', () => {
+    const customer = {
+      vehicle: {
+        maxTankCapacity: 100,
+        fuelRemains: 90,
+      },
+      money: 500,
+    };
+    const fuelPrice = 5;
+
+    const expectedFuelRemainsAfterFilling = customer.vehicle.maxTankCapacity;
+
+    fillTank(customer, fuelPrice);
+
+    expect(customer.vehicle.fuelRemains).toEqual(
+      expectedFuelRemainsAfterFilling,
+    );
+  });
+
+  it('should verify poured amount by discarding number to the tenth part'
+    , () => {
+      const customer = {
+        vehicle: {
+          maxTankCapacity: 13,
+          fuelRemains: 10,
+        },
+        money: 10000,
+      };
+      const fuelPrice = 17.84888112123;
+      const roundedFuelPrice = Math.floor(fuelPrice * 10) / 10;
+
+      const moneyBefore = customer.money;
+      const expectedPrice
+      = Math.floor(
+        roundedFuelPrice
+          * (customer.vehicle.maxTankCapacity - customer.vehicle.fuelRemains)
+          * 100,
+      ) / 100;
+
+      fillTank(customer, roundedFuelPrice);
+
+      expect(customer.money).toEqual(moneyBefore - expectedPrice);
+    });
+
   // write tests here
 });
