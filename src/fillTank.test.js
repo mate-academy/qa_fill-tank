@@ -119,6 +119,9 @@ describe('fillTank', () => {
       money: 500,
     };
     const fuelPrice = 5;
+    const poured = customer.vehicle.maxTankCapacity
+      - customer.vehicle.fuelRemains;
+    const expectedPrice = Math.round(fuelPrice * poured * 100) / 100;
 
     const expectedFuelRemainsAfterFilling = customer.vehicle.maxTankCapacity;
 
@@ -127,6 +130,7 @@ describe('fillTank', () => {
     expect(customer.vehicle.fuelRemains).toEqual(
       expectedFuelRemainsAfterFilling,
     );
+    expect(expectedPrice).toEqual(Math.round(fuelPrice * poured * 100) / 100);
   });
 
   it('should verify poured amount by discarding number to the tenth part'
@@ -134,24 +138,20 @@ describe('fillTank', () => {
       const customer = {
         vehicle: {
           maxTankCapacity: 13,
-          fuelRemains: 10,
+          fuelRemains: 10.125,
         },
         money: 10000,
       };
-      const fuelPrice = 17.84888112123;
-      const roundedFuelPrice = Math.floor(fuelPrice * 10) / 10;
-
+      const fuelPrice = 20;
+      const pouredLitresTruncated = Math.floor((customer.vehicle.maxTankCapacity
+        - customer.vehicle.fuelRemains) * 10) / 10;
       const moneyBefore = customer.money;
-      const expectedPrice
-      = Math.floor(
-        roundedFuelPrice
-          * (customer.vehicle.maxTankCapacity - customer.vehicle.fuelRemains)
-          * 100,
-      ) / 100;
 
-      fillTank(customer, roundedFuelPrice);
+      fillTank(customer, fuelPrice);
 
-      expect(customer.money).toEqual(moneyBefore - expectedPrice);
+      const priceForFilling = pouredLitresTruncated * fuelPrice;
+
+      expect(customer.money).toBe(moneyBefore - priceForFilling);
     });
 
   // write tests here
