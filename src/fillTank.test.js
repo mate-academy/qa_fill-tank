@@ -14,6 +14,12 @@ describe('fillTank', () => {
     };
   });
 
+  test('returns undefined', () => {
+    const result = fillTank(customer, 10, 5);
+
+    expect(result).toBeUndefined();
+  });
+
   test('fills full tank when amount not provided and customer can pay', () => {
     const price = 10;
 
@@ -41,6 +47,23 @@ describe('fillTank', () => {
 
     expect(customer.vehicle.fuelRemains).toBeCloseTo(8 + 10, 1);
     expect(customer.money).toBeCloseTo(0, 2);
+  });
+
+  test('when amount not provided but money is limited', () => {
+    customer.money = 20; // cannot fill full tank
+    customer.vehicle.fuelRemains = 0;
+
+    const price = 3;
+
+    fillTank(customer, price);
+
+    // 20 / 3 = 6.666...
+    // floor to 0.1 → 6.6
+    const expectedLiters = 6.6;
+    const expectedCharge = Number((expectedLiters * price).toFixed(2));
+
+    expect(customer.vehicle.fuelRemains).toBeCloseTo(expectedLiters, 1);
+    expect(customer.money).toBeCloseTo(20 - expectedCharge, 2);
   });
 
   test('rounds poured liters by discarding after first decimal', () => {
@@ -77,7 +100,7 @@ describe('fillTank', () => {
     customer.vehicle.fuelRemains = 0;
     customer.money = 100;
 
-    const price = 1.234;
+    const price = 1.2345;
 
     fillTank(customer, price, 10);
 
