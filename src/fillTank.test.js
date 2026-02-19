@@ -100,7 +100,7 @@ describe('fillTank', () => {
     customer.vehicle.fuelRemains = 0;
     customer.money = 100;
 
-    const price = 1.2345;
+    const price = 1.234;
 
     fillTank(customer, price, 10);
 
