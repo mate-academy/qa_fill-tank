@@ -1,7 +1,7 @@
-"use strict";
+'use strict';
 
-describe("fillTank", () => {
-  const { fillTank } = require("./fillTank");
+describe('fillTank', () => {
+  const { fillTank } = require('./fillTank');
 
   it("shouldn't return a value", () => {
     const customer = {
@@ -84,7 +84,7 @@ describe("fillTank", () => {
       },
     };
 
-    fillTank(customer, 15, 20.4);
+    fillTank(customer, 15, 20.47);
 
     expect(customer).toEqual({
       money: 2194,
@@ -95,7 +95,7 @@ describe("fillTank", () => {
     });
   });
 
-  it(`don't pour if 'amount' < 2`, () => {
+  it(`don't pour if requested fuel less than 2 liters`, () => {
     const customer = {
       money: 2500,
       vehicle: {
@@ -115,6 +115,26 @@ describe("fillTank", () => {
     });
   });
 
+  it(`don't pour if free tank capacity less than 2`, () => {
+    const customer = {
+      money: 2500,
+      vehicle: {
+        maxTankCapacity: 40,
+        fuelRemains: 39,
+      },
+    };
+
+    fillTank(customer, 15, 5);
+
+    expect(customer).toEqual({
+      money: 2500,
+      vehicle: {
+        maxTankCapacity: 40,
+        fuelRemains: 39,
+      },
+    });
+  });
+
   it(`round the price of purshased fuel`, () => {
     const customer = {
       money: 5000,
@@ -124,13 +144,13 @@ describe("fillTank", () => {
       },
     };
 
-    fillTank(customer, 15.8, 23);
+    fillTank(customer, 15.83, 23.5);
 
     expect(customer).toEqual({
-      money: 4636.6,
+      money: 4627.99,
       vehicle: {
         maxTankCapacity: 40,
-        fuelRemains: 37,
+        fuelRemains: 37.5,
       },
     });
   });
