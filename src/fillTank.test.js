@@ -38,9 +38,11 @@ describe('fillTank', () => {
   });
 
   test('should round poured fuel down to tenth', () => {
-    fillTank(customer, 33, 10);
+    customer.money = 333;
 
-    expect(customer.vehicle.fuelRemains).toBe(18);
+    fillTank(customer, 100, 10);
+
+    expect(customer.vehicle.fuelRemains).toBe(11.3);
   });
 
   test('should not pour fuel if amount is less than 2 liters', () => {
@@ -55,6 +57,6 @@ describe('fillTank', () => {
 
     fillTank(customer, 33.333, 3);
 
-    expect(customer.money).toBeLessThan(100);
+    expect(customer.money).toBe(0);
   });
 });
