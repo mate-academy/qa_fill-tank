@@ -21,7 +21,7 @@ describe('fillTank', () => {
     expect(customer.money).toBe(2500);
   });
 
-  it('should fill to max capacity sf amount is lager than free space', ()=> {
+  it('should fill to max capacity if amount is larger than free space', () => {
     fillTank(customer, fuelPrice, 1000);
     expect(customer.vehicle.fuelRemains).toBe(40);
     expect(customer.money).toBe(1400);
@@ -31,6 +31,14 @@ describe('fillTank', () => {
     fillTank(customer, fuelPrice, 1.99);
     expect(customer.vehicle.fuelRemains).toBe(8);
     expect(customer.money).toBe(3000);
+  });
+
+  it('should not fill if amount limited by money is less than 2 liters', () => {
+    customer.money = 90;
+    fillTank(customer, fuelPrice, 10);
+
+    expect(customer.vehicle.fuelRemains).toBe(8);
+    expect(customer.money).toBe(90);
   });
 
   it('should limit fuel by customer money', () => {
