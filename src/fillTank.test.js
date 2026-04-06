@@ -53,7 +53,7 @@ describe('fillTank', () => {
         fuelRemains: 8,
       },
     };
-   fillTank(customer, 10);
+   fillTank(customer, 10, 50);
     expect(customer.vehicle.fuelRemains).toBe(40);
     expect(customer.money).toBe(680);
    });
