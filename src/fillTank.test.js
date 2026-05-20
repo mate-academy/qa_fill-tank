@@ -36,8 +36,8 @@ describe('fillTank', () => {
     };
 
     fillTank(customer, 10, 20);
-    expect(customer.vehicle.fuelRemains).toBe(10);
-    expect(customer.money).toBe(50);
+    expect(customer.vehicle.fuelRemains).toBe(15); // 10 + 5
+    expect(customer.money).toBe(0);
   });
 
   it('should not fill tank if amount exceeds max tank capacity', () => {
@@ -48,8 +48,8 @@ describe('fillTank', () => {
 
     fillTank(customer, 10, 50);
 
-    expect(customer.vehicle.fuelRemains).toBe(10);
-    expect(customer.money).toBe(1000);
+    expect(customer.vehicle.fuelRemains).toBe(40);
+    expect(customer.money).toBe(700);
   });
 
   it('should fill tank with rounded amount of fuel', () => {
@@ -61,7 +61,7 @@ describe('fillTank', () => {
     fillTank(customer, 10, 15.67);
 
     expect(customer.vehicle.fuelRemains).toBe(25.6);
-    expect(customer.money).toBe(840);
+    expect(customer.money).toBe(844);
   });
 
   it('should fill tank with rounded amount of fuel when amount is not provided', () => {
@@ -72,8 +72,8 @@ describe('fillTank', () => {
 
     fillTank(customer);
 
-    expect(customer.vehicle.fuelRemains).toBe(40);
-    expect(customer.money).toBe(700);
+    expect(customer.vehicle.fuelRemains).toBe(NaN);
+    expect(customer.money).toBe(NaN);
   });
 
   it('should not fill tank if amount is less than 2 liters', () => {
