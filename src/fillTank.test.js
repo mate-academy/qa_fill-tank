@@ -90,25 +90,28 @@ describe('fillTank', () => {
 
     fillTank(customer, 33, 10);
 
-    // 100 / 33 = 3.0303..., więc klient dostaje 3 litry.
     expect(customer.vehicle.fuelRemains).toBe(11);
     expect(customer.money).toBe(1);
   });
 
-  it('should not pour fuel when the rounded amount is less than 2 liters', () => {
-    const customer = {
-      money: 3000,
-      vehicle: {
-        maxTankCapacity: 40,
-        fuelRemains: 8,
-      },
-    };
+  // eslint-disable-next-line max-len
+  it(
+    'should not pour fuel when the ' + 'rounded amount is less than 2 liters',
+    () => {
+      const customer = {
+        money: 3000,
+        vehicle: {
+          maxTankCapacity: 40,
+          fuelRemains: 8,
+        },
+      };
 
-    fillTank(customer, 50, 1.99);
+      fillTank(customer, 50, 1.99);
 
-    expect(customer.vehicle.fuelRemains).toBe(8);
-    expect(customer.money).toBe(3000);
-  });
+      expect(customer.vehicle.fuelRemains).toBe(8);
+      expect(customer.money).toBe(3000);
+    },
+  );
 
   it('should pour exactly 2 liters', () => {
     const customer = {
@@ -136,7 +139,6 @@ describe('fillTank', () => {
 
     fillTank(customer, 10, 10);
 
-    // 19.99 / 10 = 1.999, po odrzuceniu cyfr zostaje 1.9 litra.
     expect(customer.vehicle.fuelRemains).toBe(8);
     expect(customer.money).toBe(19.99);
   });
@@ -167,7 +169,6 @@ describe('fillTank', () => {
 
     fillTank(customer, 1.111, 3);
 
-    // 3 × 1.111 = 3.333, cena po zaokrągleniu wynosi 3.33.
     expect(customer.vehicle.fuelRemains).toBe(11);
     expect(customer.money).toBeCloseTo(96.67);
   });
