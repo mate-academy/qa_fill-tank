@@ -36,7 +36,7 @@ function fillTank(customer, fuelPrice, amount = Infinity) {
 }
 
 function roundFuel(fuel) {
-  return Math.floor(fuel * 10) / 10;
+  return Math.round(fuel * 10) / 10;
 }
 
 module.exports = { fillTank };
