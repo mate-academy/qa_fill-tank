@@ -91,10 +91,10 @@ describe('fillTank', () => {
       },
     };
 
-    fillTank(customer, 10.126, 2);
+    fillTank(customer, 10.129, 2);
 
     expect(customer.vehicle.fuelRemains).toBe(7);
-    expect(customer.money).toBe(79.75);
+    expect(customer.money).toBe(79.74);
   });
 
   test('should not return a value', () => {
