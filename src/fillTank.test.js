@@ -203,7 +203,7 @@ describe('fillTank', () => {
 
   it('should round fuel price to the nearest hundredth', () => {
     const customer = {
-      money: 10,
+      money: 100,
       vehicle: {
         maxTankCapacity: 40,
         fuelRemains: 10,
