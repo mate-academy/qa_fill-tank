@@ -213,7 +213,7 @@ describe('fillTank', () => {
     fillTank(customer, 1.15, 5.3);
 
     expect(customer).toEqual({
-      money: 3.9,
+      money: 93.9,
       vehicle: {
         maxTankCapacity: 40,
         fuelRemains: 15.3,
