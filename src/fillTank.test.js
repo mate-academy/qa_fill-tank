@@ -142,4 +142,30 @@ describe('fillTank', () => {
       expect(customer).toEqual(expectedCustomer);
     },
   );
+
+  it('should always fill in only what the client can pay', () => {
+    const customer = {
+      money: 2000,
+      vehicle: {
+        maxTankCapacity: 80,
+        fuelRemains: 2,
+      },
+    };
+
+    const fuelPrice = 50;
+
+    const amount = 60;
+
+    const expectedCustomer = {
+      money: 0,
+      vehicle: {
+        maxTankCapacity: 80,
+        fuelRemains: 42,
+      },
+    };
+
+    expect(fillTank(customer, fuelPrice, amount)).toBe(undefined);
+
+    expect(customer).toEqual(expectedCustomer);
+  });
 });
